@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+h2 {
+    color: #007bff;
+}
+
+h1 {
+    color: #007bff;
+}
+
+.btn {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+p {
+    color: navy;
+    text-indent: 30px;
+    text-transform: uppercase;
+  }

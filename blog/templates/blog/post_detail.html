@@ -1,0 +1,38 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <p><strong>Author:</strong> {{ post.author }}</p>
+
+    <a href="{% url 'post_edit' pk=post.pk %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'post_delete' pk=post.pk %}" class="btn btn-danger">Delete</a>
+
+
+    {% if post.published_date %}
+        <p><strong>Published on:</strong> {{ post.published_date }}</p>
+    {% else %}
+        <p><em>Not published yet</em></p>
+    {% endif %}
+
+    <p>{{ post.text|linebreaks }}</p>
+
+
+    <h3>Comments</h3>
+    {% for comment in post.comments.all %}
+      {% if comment.approved %}
+        <div class="bg-white border border-gray-200 rounded p-4 mb-3 shadow">
+          <strong>{{ comment.author }}</strong> — {{ comment.created_date|date:"F j, Y, g:i a" }}<br>
+          <p>{{ comment.text }}</p>
+        </div>
+      {% endif %}
+    {% empty %}
+      <p>No comments yet.</p>
+    {% endfor %}
+
+    <h3 class="mt-6 mb-2 text-lg font-semibold">Add a Comment</h3>
+    <form action="{% url 'add_comment_to_post' post.pk %}" method="post" class="bg-white p-4 border rounded shadow">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="mt-2 bg-blue-500 text-yellow px-4 py-2 rounded hover:bg-blue-600">Submit Comment</button>
+    </form>
+{% endblock %}
